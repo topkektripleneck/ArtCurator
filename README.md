@@ -6,6 +6,14 @@ The project consists of a high-speed Python data pipeline that aggregates data f
 1. **Node Graph Map:** A force-directed cluster layout to explore the macro-history of art.
 2. **Essay Reader:** A narrative-driven, "Disco Elysium" style detailed view for exploring individual movements.
 
+## Visual Organization
+
+ArtMap organizes the history of art into two primary visual spaces:
+- **Genealogical Map:** A large, central "bubble" containing classified movements organized by era and relationship.
+- **Unclassified Movements:** A separate dedicated diagram area for movements awaiting categorization, ensuring a clean and structured visualization of the main art history timeline.
+
+![ArtMap Dual-Diagram Layout](app/src/assets/preview_dual_bubbles.png)
+
 ## Project Architecture
 
 - `scraper/`: Contains the Python data pipeline used to build the ArtMap dataset.
