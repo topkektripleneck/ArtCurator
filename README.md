@@ -1,4 +1,6 @@
 # ArtMap: Taste Curator
+<img width="925" height="544" alt="Screenshot 2026-05-06 010154" src="https://github.com/user-attachments/assets/9cb04fa4-4791-4dbf-9aec-65cf7ae7d166" />
+
 
 ArtMap is an interactive, node-based genealogical map of art history. It visualizes the relationships, influences, and evolutions of over 600 art movements, styles, and periods.
 
