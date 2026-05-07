@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArtMap — The Genealogy of Visual History</title>
+    <meta name="description" content="Explore the genealogy of 400+ art movements through an interactive node graph and atmospheric, narrative-driven essays." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Ambient particles -->
+    <canvas id="particles"></canvas>
+
+    <!-- ═══ VIEW 1: MAP VIEW ═══ -->
+    <div id="map-view" class="view active">
+      <!-- Header bar -->
+      <header id="map-header">
+        <div class="logo">
+          <span class="logo-icon">◆</span>
+          <span class="logo-text">ArtMap</span>
+        </div>
+        <div class="header-subtitle">The Genealogy of Visual History</div>
+        <div class="header-nav">
+          <button id="tab-graph" class="nav-tab active">Graph Map</button>
+          <button id="tab-browser" class="nav-tab">List Browser</button>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="header-btn" title="Toggle theme">
+            <span class="btn-icon">◑</span>
+          </button>
+          <button id="sidebar-toggle" class="header-btn" title="Toggle Sidebar">
+            <span class="btn-icon">☰</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Sidebar -->
+      <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <span class="sidebar-title">Explore</span>
+          <button id="filter-reset" class="sidebar-reset-btn" title="Reset view">✕</button>
+        </div>
+        
+        <div class="sidebar-section">
+          <label class="sidebar-label">Search Movement</label>
+          <div class="filter-select-wrapper">
+            <input type="text" id="map-search" class="sidebar-input" placeholder="Type to search..." autocomplete="off" />
+            <div id="filter-dropdown" class="filter-dropdown hidden"></div>
+          </div>
+        </div>
+
+        <div class="sidebar-section sidebar-flex">
+          <label class="sidebar-label">Filter by Era</label>
+          <div id="sidebar-era-list" class="sidebar-era-list"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <label class="sidebar-label">Filter by Region</label>
+          <select id="sidebar-region-filter" class="sidebar-select">
+            <option value="">All Regions</option>
+          </select>
+        </div>
+
+        <div class="sidebar-section">
+          <label class="sidebar-label">Filter by Artist / Sub-tag</label>
+          <div class="filter-select-wrapper">
+            <input type="text" id="sidebar-artist-search" class="sidebar-input" placeholder="Search artists..." autocomplete="off" />
+            <div id="sidebar-artist-dropdown" class="filter-dropdown hidden"></div>
+          </div>
+          <div id="active-subtags" class="active-subtags"></div>
+        </div>
+      </div>
+
+      <!-- Main Viewport -->
+      <main id="main-content">
+        <!-- View 1: Graph View -->
+        <div id="graph-view" class="active">
+          <!-- Timeline Slider -->
+          <div id="timeline-bar" class="timeline-bar">
+            <span id="timeline-label-min" class="timeline-label">500 BC</span>
+            <div class="timeline-track-wrapper">
+              <input type="range" id="timeline-min" class="timeline-range" min="-500" max="2030" value="-500" step="10" />
+              <input type="range" id="timeline-max" class="timeline-range" min="-500" max="2030" value="2030" step="10" />
+              <div id="timeline-fill" class="timeline-fill"></div>
+            </div>
+            <span id="timeline-label-max" class="timeline-label">2030</span>
+          </div>
+
+          <!-- D3 SVG container -->
+          <div id="graph-container">
+            <svg id="graph-svg"></svg>
+          </div>
+
+          <!-- Tooltip -->
+          <div id="node-tooltip" class="node-tooltip hidden">
+            <img id="tooltip-img" class="tooltip-img" src="" alt="" />
+            <div class="tooltip-content">
+              <div id="tooltip-name" class="tooltip-name"></div>
+              <div id="tooltip-artist" class="tooltip-artist"></div>
+              <div id="tooltip-desc" class="tooltip-desc"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View 2: Browser View (New) -->
+        <section id="browser-view" class="hidden">
+          <div class="browser-controls">
+            <div class="browser-search-wrap">
+              <input id="browser-search" type="text" class="sidebar-input" placeholder="Search movements, figures, regions…" autocomplete="off">
+            </div>
+            <select id="browser-region-select" class="sidebar-select browser-select-inline"></select>
+            <button id="browser-clear" class="sidebar-reset-btn">✕ Clear filters</button>
+            <span id="browser-count" class="browser-count"></span>
+          </div>
+
+          <div id="browser-era-filters" class="browser-era-filters"></div>
+
+          <div class="browser-table-wrap">
+            <table class="browser-table">
+              <thead>
+                <tr>
+                  <th data-sort="name">Movement <span class="sort-icon"></span></th>
+                  <th data-sort="era">Era <span class="sort-icon"></span></th>
+                  <th data-sort="region">Region <span class="sort-icon"></span></th>
+                  <th>Key Figures</th>
+                </tr>
+              </thead>
+              <tbody id="browser-tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="browser-pagination">
+            <button id="browser-prev" class="header-btn">← Prev</button>
+            <span id="browser-page-info"></span>
+            <button id="browser-next" class="header-btn">Next →</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ═══ VIEW 2: ESSAY VIEW (Disco Elysium style) ═══ -->
+    <div id="essay-view" class="view">
+      <!-- Background layers -->
+      <div id="bg-layer" class="bg-layer"></div>
+      <div id="bg-layer-next" class="bg-layer"></div>
+      <div id="bg-overlay" class="bg-overlay"></div>
+
+      <!-- Back button -->
+      <button id="back-to-map" class="back-btn">
+        ← Back to Map
+      </button>
+
+      <!-- Essay content -->
+      <div id="essay-content">
+        <div class="essay-header">
+          <div class="essay-header-top">
+            <div class="essay-hero-wrapper">
+              <img id="essay-hero-img" class="essay-hero-img" src="" alt="" />
+              <div class="essay-hero-gradient"></div>
+            </div>
+            <div class="essay-info">
+              <h1 id="essay-title" class="essay-title"></h1>
+              <div class="essay-meta">
+                <span id="essay-era" class="meta-tag era-tag"></span>
+                <span id="essay-region" class="meta-tag region-tag"></span>
+              </div>
+              <div id="essay-figures" class="essay-figures"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="essay-body" class="essay-body"></div>
+
+        <button id="skip-btn" class="skip-btn">Skip ▸▸</button>
+
+        <!-- Relationships -->
+        <div id="essay-relations" class="essay-relations hidden">
+          <div class="relations-title">Genealogy</div>
+          <div id="relations-list" class="relations-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ WELCOME OVERLAY ═══ -->
+    <div id="welcome-overlay" class="welcome-overlay">
+      <div class="welcome-content">
+        <div class="welcome-diamond">◆</div>
+        <h1 class="welcome-title">ArtMap</h1>
+        <p class="welcome-sub">The Genealogy of Visual History</p>
+        <p class="welcome-desc">An interactive exploration of 400+ art movements and their interconnected legacy.</p>
+        <button id="welcome-enter" class="welcome-btn">Explore the Map</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

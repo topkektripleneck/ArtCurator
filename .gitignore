@@ -1,0 +1,42 @@
+# Environments
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+app/dist/
+build/
+bin/
+obj/
+.ruff_cache/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Dependencies
+node_modules/
+app/node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Local data & Scratch
+scratch/
+files/
+.gemini/
+*.log
+npm-debug.log*
+
+# Editor/System
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ArtMap Specific (Large Assets)
+# app/public/images/ # Optional: keep if you want users to have the base images

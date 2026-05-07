@@ -1,0 +1,1745 @@
+[
+  {
+    "from": "ai_art",
+    "to": "generative_5474",
+    "type": "child_of",
+    "source_name": "AI art",
+    "target_name": "Generative AI art"
+  },
+  {
+    "from": "abbasid_ar_fd88",
+    "to": "islamic_ar_d877",
+    "type": "child_of",
+    "source_name": "Abbasid architecture",
+    "target_name": "Islamic architecture"
+  },
+  {
+    "from": "abbasid_ar_fd88",
+    "to": "abbasid_art",
+    "type": "child_of",
+    "source_name": "Abbasid architecture",
+    "target_name": "Abbasid art"
+  },
+  {
+    "from": "abstract_art",
+    "to": "modern_art",
+    "type": "child_of",
+    "source_name": "Abstract art",
+    "target_name": "modern art"
+  },
+  {
+    "from": "abstract_e_db59",
+    "to": "expressionism",
+    "type": "child_of",
+    "source_name": "Abstract expressionism",
+    "target_name": "Expressionism"
+  },
+  {
+    "from": "abstract_e_db59",
+    "to": "abstract_art",
+    "type": "child_of",
+    "source_name": "Abstract expressionism",
+    "target_name": "abstract art"
+  },
+  {
+    "from": "abstract_e_db59",
+    "to": "neo_expres_21a4",
+    "type": "influenced_by",
+    "source_name": "Abstract expressionism",
+    "target_name": "Neo-Expressonism"
+  },
+  {
+    "from": "abstract_i_2183",
+    "to": "impressionism",
+    "type": "influenced_by",
+    "source_name": "Abstract impressionism",
+    "target_name": "Impressionism"
+  },
+  {
+    "from": "abstract_i_2183",
+    "to": "post_impre_1ed8",
+    "type": "influenced_by",
+    "source_name": "Abstract impressionism",
+    "target_name": "Post-impressionism"
+  },
+  {
+    "from": "abstract_i_2183",
+    "to": "lyrical_ab_ea4b",
+    "type": "influenced_by",
+    "source_name": "Abstract impressionism",
+    "target_name": "lyrical abstraction"
+  },
+  {
+    "from": "acousmatic_824f",
+    "to": "electroaco_dace",
+    "type": "child_of",
+    "source_name": "Acousmatic music",
+    "target_name": "electroacoustic music"
+  },
+  {
+    "from": "acousmatic_06c5",
+    "to": "sound",
+    "type": "child_of",
+    "source_name": "Acousmatic sound",
+    "target_name": "sound"
+  },
+  {
+    "from": "african_art",
+    "to": "culture_of_de08",
+    "type": "child_of",
+    "source_name": "African art",
+    "target_name": "culture of Africa"
+  },
+  {
+    "from": "african_art",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "African art",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "african_sc_13ab",
+    "to": "art_of_scu_7374",
+    "type": "child_of",
+    "source_name": "African sculpture",
+    "target_name": "art of sculpture"
+  },
+  {
+    "from": "african_sc_13ab",
+    "to": "visual_art_9d41",
+    "type": "child_of",
+    "source_name": "African sculpture",
+    "target_name": "visual arts of Africa"
+  },
+  {
+    "from": "african_wa_536c",
+    "to": "wrap",
+    "type": "child_of",
+    "source_name": "African wax prints",
+    "target_name": "wrap"
+  },
+  {
+    "from": "african_wa_536c",
+    "to": "textile",
+    "type": "child_of",
+    "source_name": "African wax prints",
+    "target_name": "textile"
+  },
+  {
+    "from": "afrofuturism",
+    "to": "science_fi_089a",
+    "type": "child_of",
+    "source_name": "Afrofuturism",
+    "target_name": "science fiction"
+  },
+  {
+    "from": "afrofuturism",
+    "to": "african_di_f86a",
+    "type": "influenced_by",
+    "source_name": "Afrofuturism",
+    "target_name": "African diaspora"
+  },
+  {
+    "from": "afrofuturism",
+    "to": "science_fi_089a",
+    "type": "influenced_by",
+    "source_name": "Afrofuturism",
+    "target_name": "science fiction"
+  },
+  {
+    "from": "airplane_b_df2c",
+    "to": "bungalow",
+    "type": "child_of",
+    "source_name": "Airplane Bungalow",
+    "target_name": "bungalow"
+  },
+  {
+    "from": "all_over_p_ba08",
+    "to": "abstract_e_db59",
+    "type": "child_of",
+    "source_name": "All-over painting",
+    "target_name": "abstract expressionism"
+  },
+  {
+    "from": "al_r_nj",
+    "to": "dance_troupe",
+    "type": "child_of",
+    "source_name": "Aláàrìnjó",
+    "target_name": "dance troupe"
+  },
+  {
+    "from": "amaravati_art",
+    "to": "indian_art",
+    "type": "child_of",
+    "source_name": "Amaravati art",
+    "target_name": "Indian art"
+  },
+  {
+    "from": "amarna_art",
+    "to": "art_of_anc_9c02",
+    "type": "child_of",
+    "source_name": "Amarna art",
+    "target_name": "art of ancient Egypt"
+  },
+  {
+    "from": "american_c_8385",
+    "to": "arts_and_c_dfa9",
+    "type": "child_of",
+    "source_name": "American Craftsman",
+    "target_name": "Arts and Crafts movement"
+  },
+  {
+    "from": "american_c_53bd",
+    "to": "colonial_a_5c05",
+    "type": "child_of",
+    "source_name": "American colonial architecture",
+    "target_name": "colonial architecture"
+  },
+  {
+    "from": "american_m_f37a",
+    "to": "modernism",
+    "type": "child_of",
+    "source_name": "American modernism",
+    "target_name": "modernism"
+  },
+  {
+    "from": "american_r_c348",
+    "to": "realism",
+    "type": "child_of",
+    "source_name": "American realism",
+    "target_name": "realism"
+  },
+  {
+    "from": "amsterdam__79f3",
+    "to": "impressionism",
+    "type": "child_of",
+    "source_name": "Amsterdam Impressionism",
+    "target_name": "Impressionism"
+  },
+  {
+    "from": "ancient_gr_c58f",
+    "to": "classical__5808",
+    "type": "child_of",
+    "source_name": "Ancient Greek art",
+    "target_name": "classical arts and culture"
+  },
+  {
+    "from": "ancient_gr_c58f",
+    "to": "greek_art",
+    "type": "child_of",
+    "source_name": "Ancient Greek art",
+    "target_name": "Greek art"
+  },
+  {
+    "from": "ancient_gr_c58f",
+    "to": "ancient_gr_06c0",
+    "type": "child_of",
+    "source_name": "Ancient Greek art",
+    "target_name": "Ancient Greek culture"
+  },
+  {
+    "from": "ancient_gr_c58f",
+    "to": "ancient_art",
+    "type": "child_of",
+    "source_name": "Ancient Greek art",
+    "target_name": "ancient art"
+  },
+  {
+    "from": "ancient_gr_c58f",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Ancient Greek art",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "ancient_ma_42b7",
+    "to": "pre_columb_52b3",
+    "type": "child_of",
+    "source_name": "Ancient Maya art",
+    "target_name": "Pre-Columbian art of Mesoamerica"
+  },
+  {
+    "from": "ancient_ma_42b7",
+    "to": "maya_culture",
+    "type": "child_of",
+    "source_name": "Ancient Maya art",
+    "target_name": "Maya culture"
+  },
+  {
+    "from": "ancient_ma_42b7",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Ancient Maya art",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "ancient_ma_42b7",
+    "to": "art_by_humans",
+    "type": "child_of",
+    "source_name": "Ancient Maya art",
+    "target_name": "art by humans"
+  },
+  {
+    "from": "anglo_saxo_c719",
+    "to": "anglo_saxo_e79b",
+    "type": "child_of",
+    "source_name": "Anglo-Saxon art",
+    "target_name": "Anglo-Saxon culture"
+  },
+  {
+    "from": "anglo_saxo_c719",
+    "to": "medieval_art",
+    "type": "child_of",
+    "source_name": "Anglo-Saxon art",
+    "target_name": "medieval art"
+  },
+  {
+    "from": "anglo_saxo_c719",
+    "to": "art_by_humans",
+    "type": "child_of",
+    "source_name": "Anglo-Saxon art",
+    "target_name": "art by humans"
+  },
+  {
+    "from": "anglo_saxo_c719",
+    "to": "germanic_a_615e",
+    "type": "influenced_by",
+    "source_name": "Anglo-Saxon art",
+    "target_name": "Germanic animal ornamentation"
+  },
+  {
+    "from": "anglo_saxo_c3a6",
+    "to": "glass",
+    "type": "child_of",
+    "source_name": "Anglo-Saxon glass",
+    "target_name": "glass"
+  },
+  {
+    "from": "anglo_saxo_c3a6",
+    "to": "archaeolog_04e3",
+    "type": "child_of",
+    "source_name": "Anglo-Saxon glass",
+    "target_name": "archaeological find"
+  },
+  {
+    "from": "aniconism__1f55",
+    "to": "aniconism",
+    "type": "child_of",
+    "source_name": "Aniconism in Buddhism",
+    "target_name": "aniconism"
+  },
+  {
+    "from": "aniconism__4f47",
+    "to": "aniconism",
+    "type": "child_of",
+    "source_name": "Aniconism in Christianity",
+    "target_name": "aniconism"
+  },
+  {
+    "from": "aniconism__cdb5",
+    "to": "aniconism",
+    "type": "child_of",
+    "source_name": "Aniconism in Islam",
+    "target_name": "aniconism"
+  },
+  {
+    "from": "antebellum_717d",
+    "to": "neoclassic_0886",
+    "type": "child_of",
+    "source_name": "Antebellum architecture",
+    "target_name": "Neoclassical architecture"
+  },
+  {
+    "from": "antwerp_school",
+    "to": "beeldenstorm",
+    "type": "influenced_by",
+    "source_name": "Antwerp school",
+    "target_name": "Beeldenstorm"
+  },
+  {
+    "from": "antwerp_school",
+    "to": "italian_re_6bd7",
+    "type": "influenced_by",
+    "source_name": "Antwerp school",
+    "target_name": "Italian Renaissance painting"
+  },
+  {
+    "from": "arabesque",
+    "to": "decorative_3c54",
+    "type": "child_of",
+    "source_name": "Arabesque",
+    "target_name": "decorative knot"
+  },
+  {
+    "from": "arabesque",
+    "to": "allover_pa_51f0",
+    "type": "child_of",
+    "source_name": "Arabesque",
+    "target_name": "allover pattern"
+  },
+  {
+    "from": "arabesque",
+    "to": "ornament",
+    "type": "child_of",
+    "source_name": "Arabesque",
+    "target_name": "ornament"
+  },
+  {
+    "from": "arabic_min_ce48",
+    "to": "manuscript_a654",
+    "type": "child_of",
+    "source_name": "Arabic miniature",
+    "target_name": "manuscript illumination"
+  },
+  {
+    "from": "arabic_typ_7d11",
+    "to": "typography",
+    "type": "child_of",
+    "source_name": "Arabic typography",
+    "target_name": "typography"
+  },
+  {
+    "from": "architectu_3741",
+    "to": "terracotta",
+    "type": "child_of",
+    "source_name": "Architectural terracotta",
+    "target_name": "terracotta"
+  },
+  {
+    "from": "armenian_m_72d0",
+    "to": "armenian_s_72b0",
+    "type": "child_of",
+    "source_name": "Armenian medieval sculpture",
+    "target_name": "Armenian sculpture"
+  },
+  {
+    "from": "armenian_m_72d0",
+    "to": "medieval_s_6de0",
+    "type": "child_of",
+    "source_name": "Armenian medieval sculpture",
+    "target_name": "medieval sculpture"
+  },
+  {
+    "from": "armory_show",
+    "to": "fauvism",
+    "type": "child_of",
+    "source_name": "Armory Show",
+    "target_name": "Fauvism"
+  },
+  {
+    "from": "armory_show",
+    "to": "cubism",
+    "type": "child_of",
+    "source_name": "Armory Show",
+    "target_name": "cubism"
+  },
+  {
+    "from": "armory_show",
+    "to": "futurism",
+    "type": "child_of",
+    "source_name": "Armory Show",
+    "target_name": "Futurism"
+  },
+  {
+    "from": "art",
+    "to": "culture",
+    "type": "child_of",
+    "source_name": "Art",
+    "target_name": "culture"
+  },
+  {
+    "from": "art",
+    "to": "arts",
+    "type": "child_of",
+    "source_name": "Art",
+    "target_name": "arts"
+  },
+  {
+    "from": "art",
+    "to": "creative_work",
+    "type": "child_of",
+    "source_name": "Art",
+    "target_name": "creative work"
+  },
+  {
+    "from": "art_deco",
+    "to": "decorative_art",
+    "type": "child_of",
+    "source_name": "Art Deco",
+    "target_name": "decorative art"
+  },
+  {
+    "from": "art_deco",
+    "to": "soci_t_des_b332",
+    "type": "influenced_by",
+    "source_name": "Art Deco",
+    "target_name": "Société des artistes décorateurs"
+  },
+  {
+    "from": "art_deco",
+    "to": "cubism",
+    "type": "influenced_by",
+    "source_name": "Art Deco",
+    "target_name": "cubism"
+  },
+  {
+    "from": "art_deco",
+    "to": "constructivism",
+    "type": "influenced_by",
+    "source_name": "Art Deco",
+    "target_name": "Constructivism"
+  },
+  {
+    "from": "art_deco",
+    "to": "functionalism",
+    "type": "influenced_by",
+    "source_name": "Art Deco",
+    "target_name": "functionalism"
+  },
+  {
+    "from": "art_deco",
+    "to": "modern_arc_4551",
+    "type": "influenced_by",
+    "source_name": "Art Deco",
+    "target_name": "modern architecture"
+  },
+  {
+    "from": "art_nouveau",
+    "to": "decorative_art",
+    "type": "child_of",
+    "source_name": "Art Nouveau",
+    "target_name": "decorative art"
+  },
+  {
+    "from": "art_nouvea_d73d",
+    "to": "stile_liberty",
+    "type": "child_of",
+    "source_name": "Art Nouveau in Milan",
+    "target_name": "Stile Liberty"
+  },
+  {
+    "from": "art_nouvea_d73d",
+    "to": "art_of_milan",
+    "type": "child_of",
+    "source_name": "Art Nouveau in Milan",
+    "target_name": "art of Milan"
+  },
+  {
+    "from": "art_manifesto",
+    "to": "manifesto",
+    "type": "child_of",
+    "source_name": "Art manifesto",
+    "target_name": "manifesto"
+  },
+  {
+    "from": "art_manifesto",
+    "to": "literature",
+    "type": "child_of",
+    "source_name": "Art manifesto",
+    "target_name": "literature"
+  },
+  {
+    "from": "art_movement",
+    "to": "cultural_m_a517",
+    "type": "child_of",
+    "source_name": "Art movement",
+    "target_name": "cultural movement"
+  },
+  {
+    "from": "art_movement",
+    "to": "art_style",
+    "type": "child_of",
+    "source_name": "Art movement",
+    "target_name": "art style"
+  },
+  {
+    "from": "art_of_champa",
+    "to": "cham_culture",
+    "type": "child_of",
+    "source_name": "Art of Champa",
+    "target_name": "Cham culture"
+  },
+  {
+    "from": "art_of_champa",
+    "to": "vietnamese_art",
+    "type": "child_of",
+    "source_name": "Art of Champa",
+    "target_name": "Vietnamese art"
+  },
+  {
+    "from": "art_of_champa",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Art of Champa",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "art_of_europe",
+    "to": "culture_of_651b",
+    "type": "child_of",
+    "source_name": "Art of Europe",
+    "target_name": "culture of Europe"
+  },
+  {
+    "from": "art_of_europe",
+    "to": "western_art",
+    "type": "child_of",
+    "source_name": "Art of Europe",
+    "target_name": "Western art"
+  },
+  {
+    "from": "art_of_europe",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Art of Europe",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "art_of_mes_855c",
+    "to": "culture_of_4b7a",
+    "type": "child_of",
+    "source_name": "Art of Mesopotamia",
+    "target_name": "culture of Ancient Mesopotamia"
+  },
+  {
+    "from": "art_of_mes_855c",
+    "to": "asian_art",
+    "type": "child_of",
+    "source_name": "Art of Mesopotamia",
+    "target_name": "Asian art"
+  },
+  {
+    "from": "art_of_mes_855c",
+    "to": "ancient_art",
+    "type": "child_of",
+    "source_name": "Art of Mesopotamia",
+    "target_name": "ancient art"
+  },
+  {
+    "from": "art_of_urartu",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Art of Urartu",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "art_of_anc_9c02",
+    "to": "culture_of_0c3e",
+    "type": "child_of",
+    "source_name": "Art of ancient Egypt",
+    "target_name": "culture of ancient Egypt"
+  },
+  {
+    "from": "art_of_anc_9c02",
+    "to": "ancient_art",
+    "type": "child_of",
+    "source_name": "Art of ancient Egypt",
+    "target_name": "ancient art"
+  },
+  {
+    "from": "art_of_anc_9c02",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Art of ancient Egypt",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "art_of_the_f5de",
+    "to": "culture_of_bc38",
+    "type": "child_of",
+    "source_name": "Art of the Low Countries",
+    "target_name": "culture of the Low Countries"
+  },
+  {
+    "from": "art_of_the_f5de",
+    "to": "rt_of_europe",
+    "type": "child_of",
+    "source_name": "Art of the Low Countries",
+    "target_name": "аrt of Europe"
+  },
+  {
+    "from": "art_of_the_76e6",
+    "to": "islamic_art",
+    "type": "child_of",
+    "source_name": "Art of the Seljuks of Iran",
+    "target_name": "Islamic art"
+  },
+  {
+    "from": "art_of_the_37f4",
+    "to": "mannerism",
+    "type": "child_of",
+    "source_name": "Art of the late 16th century in Milan",
+    "target_name": "Mannerism"
+  },
+  {
+    "from": "art_of_the_37f4",
+    "to": "art_of_milan",
+    "type": "child_of",
+    "source_name": "Art of the late 16th century in Milan",
+    "target_name": "art of Milan"
+  },
+  {
+    "from": "art_pop",
+    "to": "pop_music",
+    "type": "child_of",
+    "source_name": "Art pop",
+    "target_name": "pop music"
+  },
+  {
+    "from": "arts_of_iran",
+    "to": "culture_of_5aac",
+    "type": "child_of",
+    "source_name": "Arts of Iran",
+    "target_name": "culture of Iran"
+  },
+  {
+    "from": "assamese_m_4796",
+    "to": "culture_of_5d11",
+    "type": "child_of",
+    "source_name": "Assamese manuscript painting",
+    "target_name": "culture of Assam"
+  },
+  {
+    "from": "assamese_m_4796",
+    "to": "indian_pai_840e",
+    "type": "child_of",
+    "source_name": "Assamese manuscript painting",
+    "target_name": "Indian painting"
+  },
+  {
+    "from": "auricular__4e59",
+    "to": "decorative_art",
+    "type": "child_of",
+    "source_name": "Auricular style",
+    "target_name": "decorative art"
+  },
+  {
+    "from": "australian_328f",
+    "to": "new_wave_film",
+    "type": "child_of",
+    "source_name": "Australian New Wave",
+    "target_name": "New Wave film"
+  },
+  {
+    "from": "australian_583f",
+    "to": "heidelberg_ea4d",
+    "type": "influenced_by",
+    "source_name": "Australian tonalism",
+    "target_name": "Heidelberg School"
+  },
+  {
+    "from": "australian_583f",
+    "to": "modern_art",
+    "type": "influenced_by",
+    "source_name": "Australian tonalism",
+    "target_name": "modern art"
+  },
+  {
+    "from": "bandhani",
+    "to": "tie_dyeing",
+    "type": "child_of",
+    "source_name": "Bandhani",
+    "target_name": "tie dyeing"
+  },
+  {
+    "from": "banko_ware",
+    "to": "japanese_p_90c1",
+    "type": "child_of",
+    "source_name": "Banko ware",
+    "target_name": "Japanese pottery and porcelain"
+  },
+  {
+    "from": "banna_i",
+    "to": "architectu_d239",
+    "type": "child_of",
+    "source_name": "Banna'i",
+    "target_name": "architectural element"
+  },
+  {
+    "from": "baroque",
+    "to": "council_of_76f8",
+    "type": "influenced_by",
+    "source_name": "Baroque",
+    "target_name": "Council of Trent"
+  },
+  {
+    "from": "baroque_re_1536",
+    "to": "revivalism",
+    "type": "child_of",
+    "source_name": "Baroque Revival architecture",
+    "target_name": "revivalism"
+  },
+  {
+    "from": "baroque_re_1536",
+    "to": "baroque_ar_020d",
+    "type": "child_of",
+    "source_name": "Baroque Revival architecture",
+    "target_name": "baroque architecture"
+  },
+  {
+    "from": "baroque_ar_020d",
+    "to": "baroque_art",
+    "type": "child_of",
+    "source_name": "Baroque architecture",
+    "target_name": "Baroque art"
+  },
+  {
+    "from": "baroque_ar_020d",
+    "to": "architecture",
+    "type": "child_of",
+    "source_name": "Baroque architecture",
+    "target_name": "architecture"
+  },
+  {
+    "from": "baroque_ar_020d",
+    "to": "counter_re_17e4",
+    "type": "influenced_by",
+    "source_name": "Baroque architecture",
+    "target_name": "Counter-Reformation"
+  },
+  {
+    "from": "baroque_dance",
+    "to": "historical_4be6",
+    "type": "child_of",
+    "source_name": "Baroque dance",
+    "target_name": "historical dance"
+  },
+  {
+    "from": "baroque_dance",
+    "to": "baroque_art",
+    "type": "child_of",
+    "source_name": "Baroque dance",
+    "target_name": "Baroque art"
+  },
+  {
+    "from": "baroque_garden",
+    "to": "garden",
+    "type": "child_of",
+    "source_name": "Baroque garden",
+    "target_name": "garden"
+  },
+  {
+    "from": "baroque_in_5906",
+    "to": "baroque_art",
+    "type": "child_of",
+    "source_name": "Baroque in Poland",
+    "target_name": "Baroque art"
+  },
+  {
+    "from": "baroque_in_5906",
+    "to": "art_in_poland",
+    "type": "child_of",
+    "source_name": "Baroque in Poland",
+    "target_name": "art in Poland"
+  },
+  {
+    "from": "baroque_pa_e131",
+    "to": "painting",
+    "type": "child_of",
+    "source_name": "Baroque painting",
+    "target_name": "painting"
+  },
+  {
+    "from": "baroque_pa_e131",
+    "to": "baroque_art",
+    "type": "child_of",
+    "source_name": "Baroque painting",
+    "target_name": "Baroque art"
+  },
+  {
+    "from": "baroque_pa_e131",
+    "to": "absolute_m_bc20",
+    "type": "influenced_by",
+    "source_name": "Baroque painting",
+    "target_name": "absolute monarchy"
+  },
+  {
+    "from": "baroque_pa_e131",
+    "to": "counter_re_17e4",
+    "type": "influenced_by",
+    "source_name": "Baroque painting",
+    "target_name": "Counter-Reformation"
+  },
+  {
+    "from": "baroque_pa_e131",
+    "to": "molanus",
+    "type": "influenced_by",
+    "source_name": "Baroque painting",
+    "target_name": "Molanus"
+  },
+  {
+    "from": "baroque_sc_a7cd",
+    "to": "baroque_art",
+    "type": "child_of",
+    "source_name": "Baroque sculpture",
+    "target_name": "Baroque art"
+  },
+  {
+    "from": "baroque_sc_a7cd",
+    "to": "art_of_scu_7374",
+    "type": "child_of",
+    "source_name": "Baroque sculpture",
+    "target_name": "art of sculpture"
+  },
+  {
+    "from": "baroque_sc_a7cd",
+    "to": "hellenisti_dc80",
+    "type": "influenced_by",
+    "source_name": "Baroque sculpture",
+    "target_name": "Hellenistic period"
+  },
+  {
+    "from": "basso_continuo",
+    "to": "accompaniment",
+    "type": "child_of",
+    "source_name": "Basso continuo",
+    "target_name": "accompaniment"
+  },
+  {
+    "from": "bayon",
+    "to": "angkor",
+    "type": "child_of",
+    "source_name": "Bayon",
+    "target_name": "Angkor"
+  },
+  {
+    "from": "beaux_arts_534a",
+    "to": "historicis_caa6",
+    "type": "child_of",
+    "source_name": "Beaux-Arts architecture",
+    "target_name": "historicist architecture"
+  },
+  {
+    "from": "bingata",
+    "to": "ry_s",
+    "type": "child_of",
+    "source_name": "Bingata",
+    "target_name": "Ryūsō"
+  },
+  {
+    "from": "bingata",
+    "to": "resist_dyeing",
+    "type": "child_of",
+    "source_name": "Bingata",
+    "target_name": "resist dyeing"
+  },
+  {
+    "from": "birch_bark_7d79",
+    "to": "roof",
+    "type": "child_of",
+    "source_name": "Birch-bark roof",
+    "target_name": "roof"
+  },
+  {
+    "from": "black_pain_d04a",
+    "to": "minimalism",
+    "type": "child_of",
+    "source_name": "Black Paintings (Stella)",
+    "target_name": "Minimalism"
+  },
+  {
+    "from": "blackletter",
+    "to": "din_16518",
+    "type": "child_of",
+    "source_name": "Blackletter",
+    "target_name": "DIN 16518"
+  },
+  {
+    "from": "blackletter",
+    "to": "script_style",
+    "type": "child_of",
+    "source_name": "Blackletter",
+    "target_name": "script style"
+  },
+  {
+    "from": "blackletter",
+    "to": "typeface",
+    "type": "child_of",
+    "source_name": "Blackletter",
+    "target_name": "typeface"
+  },
+  {
+    "from": "blotter_art",
+    "to": "psychedeli_0577",
+    "type": "child_of",
+    "source_name": "Blotter art",
+    "target_name": "psychedelic art"
+  },
+  {
+    "from": "blotter_art",
+    "to": "folk_art",
+    "type": "child_of",
+    "source_name": "Blotter art",
+    "target_name": "folk art"
+  },
+  {
+    "from": "brazilian__ebaf",
+    "to": "academic_art",
+    "type": "child_of",
+    "source_name": "Brazilian academic art",
+    "target_name": "academic art"
+  },
+  {
+    "from": "brazilian__ebaf",
+    "to": "academic_art",
+    "type": "influenced_by",
+    "source_name": "Brazilian academic art",
+    "target_name": "academic art"
+  },
+  {
+    "from": "buddhist_a_6027",
+    "to": "buddhist_art",
+    "type": "child_of",
+    "source_name": "Buddhist architecture",
+    "target_name": "Buddhist art"
+  },
+  {
+    "from": "buddhist_a_6027",
+    "to": "sacred_arc_9d09",
+    "type": "child_of",
+    "source_name": "Buddhist architecture",
+    "target_name": "sacred architecture"
+  },
+  {
+    "from": "buddhist_art",
+    "to": "culture_of_e5b6",
+    "type": "child_of",
+    "source_name": "Buddhist art",
+    "target_name": "culture of Buddhism"
+  },
+  {
+    "from": "buddhist_art",
+    "to": "religious_art",
+    "type": "child_of",
+    "source_name": "Buddhist art",
+    "target_name": "religious art"
+  },
+  {
+    "from": "bundwerk",
+    "to": "structural_6422",
+    "type": "child_of",
+    "source_name": "Bundwerk",
+    "target_name": "structural system"
+  },
+  {
+    "from": "bundwerk",
+    "to": "frame_cons_1265",
+    "type": "child_of",
+    "source_name": "Bundwerk",
+    "target_name": "frame construction"
+  },
+  {
+    "from": "bunka_shishu",
+    "to": "embroidery",
+    "type": "child_of",
+    "source_name": "Bunka shishu",
+    "target_name": "embroidery"
+  },
+  {
+    "from": "burgher_arms",
+    "to": "coat_of_arms",
+    "type": "child_of",
+    "source_name": "Burgher arms",
+    "target_name": "coat of arms"
+  },
+  {
+    "from": "byzantine_art",
+    "to": "byzantine__c658",
+    "type": "child_of",
+    "source_name": "Byzantine art",
+    "target_name": "Byzantine culture"
+  },
+  {
+    "from": "byzantine_art",
+    "to": "art_of_the_1c20",
+    "type": "child_of",
+    "source_name": "Byzantine art",
+    "target_name": "art of the Earth"
+  },
+  {
+    "from": "byzantine_silk",
+    "to": "silk_fabric",
+    "type": "child_of",
+    "source_name": "Byzantine silk",
+    "target_name": "silk fabric"
+  },
+  {
+    "from": "cabriole_leg",
+    "to": "furniture_leg",
+    "type": "child_of",
+    "source_name": "Cabriole leg",
+    "target_name": "furniture leg"
+  },
+  {
+    "from": "cadaver_mo_8bad",
+    "to": "sepulchral_e3ee",
+    "type": "child_of",
+    "source_name": "Cadaver monument",
+    "target_name": "sepulchral monument"
+  },
+  {
+    "from": "california_6c3b",
+    "to": "impressionism",
+    "type": "child_of",
+    "source_name": "California Impressionism",
+    "target_name": "Impressionism"
+  },
+  {
+    "from": "cameo_carving",
+    "to": "work_of_art",
+    "type": "child_of",
+    "source_name": "Cameo (carving)",
+    "target_name": "work of art"
+  },
+  {
+    "from": "canzone",
+    "to": "culture_of_8161",
+    "type": "child_of",
+    "source_name": "Canzone",
+    "target_name": "culture of Italy"
+  },
+  {
+    "from": "canzone",
+    "to": "song",
+    "type": "child_of",
+    "source_name": "Canzone",
+    "target_name": "song"
+  },
+  {
+    "from": "canzone",
+    "to": "ballad",
+    "type": "child_of",
+    "source_name": "Canzone",
+    "target_name": "ballad"
+  },
+  {
+    "from": "canzonetta",
+    "to": "composed_m_77fd",
+    "type": "child_of",
+    "source_name": "Canzonetta",
+    "target_name": "composed musical work"
+  },
+  {
+    "from": "canzonetta",
+    "to": "canzona",
+    "type": "child_of",
+    "source_name": "Canzonetta",
+    "target_name": "canzona"
+  },
+  {
+    "from": "cape_cod_house",
+    "to": "american_c_53bd",
+    "type": "child_of",
+    "source_name": "Cape Cod (house)",
+    "target_name": "American colonial architecture"
+  },
+  {
+    "from": "caravaggisti",
+    "to": "baroque",
+    "type": "child_of",
+    "source_name": "Caravaggisti",
+    "target_name": "Baroque"
+  },
+  {
+    "from": "carolingia_92bc",
+    "to": "medieval_r_3060",
+    "type": "child_of",
+    "source_name": "Carolingian Renaissance",
+    "target_name": "Medieval renaissances"
+  },
+  {
+    "from": "carolingia_a201",
+    "to": "carolingia_0f32",
+    "type": "child_of",
+    "source_name": "Carolingian illumination",
+    "target_name": "Carolingian art"
+  },
+  {
+    "from": "carolingia_a201",
+    "to": "art_of_med_c14f",
+    "type": "child_of",
+    "source_name": "Carolingian illumination",
+    "target_name": "art of medieval illumination"
+  },
+  {
+    "from": "carpet_page",
+    "to": "decorative_3c54",
+    "type": "child_of",
+    "source_name": "Carpet page",
+    "target_name": "decorative knot"
+  },
+  {
+    "from": "catholic_art",
+    "to": "christian_art",
+    "type": "child_of",
+    "source_name": "Catholic art",
+    "target_name": "Christian art"
+  },
+  {
+    "from": "celtic_art",
+    "to": "celtic_culture",
+    "type": "child_of",
+    "source_name": "Celtic art",
+    "target_name": "Celtic culture"
+  },
+  {
+    "from": "celtic_art",
+    "to": "art_by_humans",
+    "type": "child_of",
+    "source_name": "Celtic art",
+    "target_name": "art by humans"
+  },
+  {
+    "from": "celtic_cross",
+    "to": "christian__3eed",
+    "type": "child_of",
+    "source_name": "Celtic cross",
+    "target_name": "Christian cross"
+  },
+  {
+    "from": "chiaramont_c671",
+    "to": "gothic_arc_1a58",
+    "type": "child_of",
+    "source_name": "Chiaramontan Gothic architecture",
+    "target_name": "Gothic architecture"
+  },
+  {
+    "from": "chicano_mo_1fbd",
+    "to": "social_mov_54ce",
+    "type": "child_of",
+    "source_name": "Chicano Movement",
+    "target_name": "social movement"
+  },
+  {
+    "from": "chicano_ar_5af8",
+    "to": "mexican_am_c575",
+    "type": "child_of",
+    "source_name": "Chicano art movement",
+    "target_name": "Mexican American art"
+  },
+  {
+    "from": "chicano_ar_5af8",
+    "to": "chicano_mo_1fbd",
+    "type": "influenced_by",
+    "source_name": "Chicano art movement",
+    "target_name": "Chicano Movement"
+  },
+  {
+    "from": "chickee",
+    "to": "shelter",
+    "type": "child_of",
+    "source_name": "Chickee",
+    "target_name": "shelter"
+  },
+  {
+    "from": "chinese_is_5059",
+    "to": "islamic_ar_d877",
+    "type": "child_of",
+    "source_name": "Chinese Islamic architecture",
+    "target_name": "Islamic architecture"
+  },
+  {
+    "from": "chinese_is_5059",
+    "to": "architectu_3a88",
+    "type": "child_of",
+    "source_name": "Chinese Islamic architecture",
+    "target_name": "architecture of China"
+  },
+  {
+    "from": "chinese_ce_a262",
+    "to": "asian_ceramics",
+    "type": "child_of",
+    "source_name": "Chinese ceramics",
+    "target_name": "Asian ceramics"
+  },
+  {
+    "from": "chinese_ce_a262",
+    "to": "pottery_ware",
+    "type": "child_of",
+    "source_name": "Chinese ceramics",
+    "target_name": "pottery ware"
+  },
+  {
+    "from": "chinese_fu_a12b",
+    "to": "furniture",
+    "type": "child_of",
+    "source_name": "Chinese furniture",
+    "target_name": "furniture"
+  },
+  {
+    "from": "chinese_pa_d461",
+    "to": "four_arts__cbed",
+    "type": "child_of",
+    "source_name": "Chinese painting",
+    "target_name": "four arts of the Chinese scholar"
+  },
+  {
+    "from": "chinese_pa_d461",
+    "to": "painting_o_792d",
+    "type": "child_of",
+    "source_name": "Chinese painting",
+    "target_name": "painting of the Earth"
+  },
+  {
+    "from": "chinese_pa_d461",
+    "to": "chinese_vi_9535",
+    "type": "child_of",
+    "source_name": "Chinese painting",
+    "target_name": "Chinese visual art"
+  },
+  {
+    "from": "chinoiserie",
+    "to": "orientalism",
+    "type": "child_of",
+    "source_name": "Chinoiserie",
+    "target_name": "Orientalism"
+  },
+  {
+    "from": "chorale_motet",
+    "to": "motet",
+    "type": "child_of",
+    "source_name": "Chorale motet",
+    "target_name": "motet"
+  },
+  {
+    "from": "chorale_motet",
+    "to": "chorale_se_9854",
+    "type": "child_of",
+    "source_name": "Chorale motet",
+    "target_name": "chorale setting"
+  },
+  {
+    "from": "christian__6f01",
+    "to": "religious__ca00",
+    "type": "child_of",
+    "source_name": "Christian symbolism",
+    "target_name": "religious symbolism"
+  },
+  {
+    "from": "cinema_novo",
+    "to": "new_wave_film",
+    "type": "child_of",
+    "source_name": "Cinema Novo",
+    "target_name": "New Wave film"
+  },
+  {
+    "from": "cin_ma_du_look",
+    "to": "new_wave_film",
+    "type": "child_of",
+    "source_name": "Cinéma du look",
+    "target_name": "New Wave film"
+  },
+  {
+    "from": "classical__5055",
+    "to": "cinema_of__3d74",
+    "type": "child_of",
+    "source_name": "Classical Hollywood cinema",
+    "target_name": "cinema of the United States"
+  },
+  {
+    "from": "colonial_r_2d81",
+    "to": "colonial_r_d86e",
+    "type": "child_of",
+    "source_name": "Colonial Revival architecture",
+    "target_name": "Colonial Revival Movement"
+  },
+  {
+    "from": "colonial_r_2d81",
+    "to": "georgian_a_963f",
+    "type": "child_of",
+    "source_name": "Colonial Revival architecture",
+    "target_name": "Georgian architecture"
+  },
+  {
+    "from": "colonial_r_2d81",
+    "to": "neoclassic_0886",
+    "type": "child_of",
+    "source_name": "Colonial Revival architecture",
+    "target_name": "Neoclassical architecture"
+  },
+  {
+    "from": "colony_houses",
+    "to": "house",
+    "type": "child_of",
+    "source_name": "Colony houses",
+    "target_name": "house"
+  },
+  {
+    "from": "colourist__336b",
+    "to": "modernism",
+    "type": "child_of",
+    "source_name": "Colourist painting",
+    "target_name": "modernism"
+  },
+  {
+    "from": "combine_pa_b545",
+    "to": "painting",
+    "type": "child_of",
+    "source_name": "Combine painting",
+    "target_name": "painting"
+  },
+  {
+    "from": "combine_pa_b545",
+    "to": "sculpture",
+    "type": "child_of",
+    "source_name": "Combine painting",
+    "target_name": "sculpture"
+  },
+  {
+    "from": "commesso",
+    "to": "opus_sectile",
+    "type": "child_of",
+    "source_name": "Commesso",
+    "target_name": "opus sectile"
+  },
+  {
+    "from": "computer_a_996f",
+    "to": "computer_s_80c1",
+    "type": "child_of",
+    "source_name": "Computer-aided design",
+    "target_name": "computer science"
+  },
+  {
+    "from": "computer_a_996f",
+    "to": "technical__ccf5",
+    "type": "child_of",
+    "source_name": "Computer-aided design",
+    "target_name": "technical drawing"
+  },
+  {
+    "from": "computer_a_996f",
+    "to": "engineering",
+    "type": "child_of",
+    "source_name": "Computer-aided design",
+    "target_name": "engineering"
+  },
+  {
+    "from": "computer_a_996f",
+    "to": "mechanical_23f7",
+    "type": "child_of",
+    "source_name": "Computer-aided design",
+    "target_name": "mechanical engineering"
+  },
+  {
+    "from": "computer_a_996f",
+    "to": "design",
+    "type": "child_of",
+    "source_name": "Computer-aided design",
+    "target_name": "design"
+  },
+  {
+    "from": "conceptual_art",
+    "to": "art",
+    "type": "child_of",
+    "source_name": "Conceptual art",
+    "target_name": "art"
+  },
+  {
+    "from": "conceptual_art",
+    "to": "marcel_duchamp",
+    "type": "influenced_by",
+    "source_name": "Conceptual art",
+    "target_name": "Marcel Duchamp"
+  },
+  {
+    "from": "conceptual_art",
+    "to": "found_object",
+    "type": "influenced_by",
+    "source_name": "Conceptual art",
+    "target_name": "found object"
+  },
+  {
+    "from": "conceptual_art",
+    "to": "formalism",
+    "type": "influenced_by",
+    "source_name": "Conceptual art",
+    "target_name": "formalism"
+  },
+  {
+    "from": "conceptual_3942",
+    "to": "photography",
+    "type": "child_of",
+    "source_name": "Conceptual photography",
+    "target_name": "photography"
+  },
+  {
+    "from": "conceptual_3942",
+    "to": "experiment_7692",
+    "type": "child_of",
+    "source_name": "Conceptual photography",
+    "target_name": "experimental photography"
+  },
+  {
+    "from": "concrete_shell",
+    "to": "thin_shell_0cba",
+    "type": "child_of",
+    "source_name": "Concrete shell",
+    "target_name": "thin-shell structure"
+  },
+  {
+    "from": "constructi_7721",
+    "to": "writing_style",
+    "type": "child_of",
+    "source_name": "Constructivism (art)",
+    "target_name": "writing style"
+  },
+  {
+    "from": "constructi_7721",
+    "to": "cubism",
+    "type": "influenced_by",
+    "source_name": "Constructivism (art)",
+    "target_name": "cubism"
+  },
+  {
+    "from": "contempora_6de4",
+    "to": "african_art",
+    "type": "child_of",
+    "source_name": "Contemporary African art",
+    "target_name": "African art"
+  },
+  {
+    "from": "contempora_7888",
+    "to": "work_of_art",
+    "type": "child_of",
+    "source_name": "Contemporary art",
+    "target_name": "work of art"
+  },
+  {
+    "from": "contempora_7888",
+    "to": "contempora_ab0b",
+    "type": "child_of",
+    "source_name": "Contemporary art",
+    "target_name": "contemporary culture"
+  },
+  {
+    "from": "contempora_7888",
+    "to": "conceptual_art",
+    "type": "influenced_by",
+    "source_name": "Contemporary art",
+    "target_name": "conceptual art"
+  },
+  {
+    "from": "contempora_7888",
+    "to": "pop_art",
+    "type": "influenced_by",
+    "source_name": "Contemporary art",
+    "target_name": "pop art"
+  },
+  {
+    "from": "contempora_bf4e",
+    "to": "contempora_79ed",
+    "type": "child_of",
+    "source_name": "Contemporary mosque architecture",
+    "target_name": "contemporary architecture"
+  },
+  {
+    "from": "contempora_bf4e",
+    "to": "religious__4523",
+    "type": "child_of",
+    "source_name": "Contemporary mosque architecture",
+    "target_name": "Religious Islamic architecture"
+  },
+  {
+    "from": "contempora_a58d",
+    "to": "french_realism",
+    "type": "influenced_by",
+    "source_name": "Contemporary realism",
+    "target_name": "French Realism"
+  },
+  {
+    "from": "costumbrismo",
+    "to": "realism",
+    "type": "child_of",
+    "source_name": "Costumbrismo",
+    "target_name": "realism"
+  },
+  {
+    "from": "crystal_cubism",
+    "to": "cubism",
+    "type": "child_of",
+    "source_name": "Crystal Cubism",
+    "target_name": "cubism"
+  },
+  {
+    "from": "cubism",
+    "to": "modernism",
+    "type": "child_of",
+    "source_name": "Cubism",
+    "target_name": "modernism"
+  },
+  {
+    "from": "cubism",
+    "to": "paul_c_zanne",
+    "type": "influenced_by",
+    "source_name": "Cubism",
+    "target_name": "Paul Cézanne"
+  },
+  {
+    "from": "cubism",
+    "to": "primitivism",
+    "type": "influenced_by",
+    "source_name": "Cubism",
+    "target_name": "primitivism"
+  },
+  {
+    "from": "cubism",
+    "to": "african_art",
+    "type": "influenced_by",
+    "source_name": "Cubism",
+    "target_name": "African art"
+  },
+  {
+    "from": "cubist_scu_6c24",
+    "to": "cubism",
+    "type": "child_of",
+    "source_name": "Cubist sculpture",
+    "target_name": "cubism"
+  },
+  {
+    "from": "cubist_scu_6c24",
+    "to": "sculpture",
+    "type": "child_of",
+    "source_name": "Cubist sculpture",
+    "target_name": "sculpture"
+  },
+  {
+    "from": "cybergoth",
+    "to": "rave",
+    "type": "child_of",
+    "source_name": "Cybergoth",
+    "target_name": "rave"
+  },
+  {
+    "from": "cybergoth",
+    "to": "rivethead",
+    "type": "child_of",
+    "source_name": "Cybergoth",
+    "target_name": "rivethead"
+  },
+  {
+    "from": "cyberpunk",
+    "to": "dystopian__3860",
+    "type": "child_of",
+    "source_name": "Cyberpunk",
+    "target_name": "dystopian fiction"
+  },
+  {
+    "from": "cyberpunk",
+    "to": "science_fi_089a",
+    "type": "child_of",
+    "source_name": "Cyberpunk",
+    "target_name": "science fiction"
+  },
+  {
+    "from": "czechoslov_0068",
+    "to": "new_wave_film",
+    "type": "child_of",
+    "source_name": "Czechoslovak New Wave",
+    "target_name": "New Wave film"
+  },
+  {
+    "from": "dada",
+    "to": "avant_garde",
+    "type": "child_of",
+    "source_name": "Dada",
+    "target_name": "avant-garde"
+  },
+  {
+    "from": "dada",
+    "to": "ubu_roi",
+    "type": "influenced_by",
+    "source_name": "Dada",
+    "target_name": "Ubu roi"
+  },
+  {
+    "from": "dada",
+    "to": "parade",
+    "type": "influenced_by",
+    "source_name": "Dada",
+    "target_name": "Parade"
+  },
+  {
+    "from": "dada",
+    "to": "cubism",
+    "type": "influenced_by",
+    "source_name": "Dada",
+    "target_name": "cubism"
+  },
+  {
+    "from": "dada",
+    "to": "expressionism",
+    "type": "influenced_by",
+    "source_name": "Dada",
+    "target_name": "Expressionism"
+  },
+  {
+    "from": "dada",
+    "to": "anti_war_m_1dcb",
+    "type": "influenced_by",
+    "source_name": "Dada",
+    "target_name": "anti-war movement"
+  },
+  {
+    "from": "dakar_school",
+    "to": "n_gritude",
+    "type": "child_of",
+    "source_name": "Dakar School",
+    "target_name": "Négritude"
+  },
+  {
+    "from": "danmei",
+    "to": "romance",
+    "type": "child_of",
+    "source_name": "Danmei",
+    "target_name": "romance"
+  },
+  {
+    "from": "danse_macabre",
+    "to": "allegory",
+    "type": "child_of",
+    "source_name": "Danse Macabre",
+    "target_name": "allegory"
+  },
+  {
+    "from": "dark_academia",
+    "to": "retro_style",
+    "type": "child_of",
+    "source_name": "Dark academia",
+    "target_name": "retro style"
+  },
+  {
+    "from": "debased_he_c82f",
+    "to": "heraldry",
+    "type": "child_of",
+    "source_name": "Debased heraldry",
+    "target_name": "heraldry"
+  },
+  {
+    "from": "decadence",
+    "to": "change",
+    "type": "child_of",
+    "source_name": "Decadence",
+    "target_name": "change"
+  },
+  {
+    "from": "decadence",
+    "to": "degradation",
+    "type": "child_of",
+    "source_name": "Decadence",
+    "target_name": "degradation"
+  },
+  {
+    "from": "deccan_pai_8d80",
+    "to": "indian_pai_840e",
+    "type": "child_of",
+    "source_name": "Deccan painting",
+    "target_name": "Indian painting"
+  },
+  {
+    "from": "deconstruc_47cd",
+    "to": "clothing",
+    "type": "child_of",
+    "source_name": "Deconstruction (fashion)",
+    "target_name": "clothing"
+  }
+]
