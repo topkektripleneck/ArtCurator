@@ -46,7 +46,8 @@ const $ = (sel) => document.querySelector(sel);
 // ── ERA CLASSIFICATION & COLOR ───────────────────────────────
 const ERA_GROUPS = [
   { label: 'Ancient & Classical', range: [-5000, 500], color: '#8B6914' },
-  { label: 'Medieval',           range: [500, 1400],   color: '#6B4423' },
+  { label: 'Early Medieval',      range: [500, 1000],   color: '#5C4033' },
+  { label: 'Medieval',           range: [1000, 1400],  color: '#6B4423' },
   { label: 'Renaissance',        range: [1400, 1600],  color: '#C4A35A' },
   { label: 'Baroque & Rococo',   range: [1600, 1800],  color: '#B8860B' },
   { label: '19th Century',       range: [1800, 1900],  color: '#D4763A' },
@@ -93,8 +94,31 @@ async function loadMovements() {
   edges = await eRes.json();
 
   // Dataset is pre-cleaned by the pipeline; simple validation only
-  movements = raw.filter(m => m.name && m.summary);
-  movements.forEach(m => { m._era = classifyEra(m); });
+  // Fix: Deduplicate by name (keep entry with longest summary)
+  const unique = new Map();
+  raw.forEach(m => {
+    if (!m.name || !m.summary) return;
+    const key = m.name.toLowerCase().trim();
+    if (!unique.has(key) || m.summary.length > unique.get(key).summary.length) {
+      unique.set(key, m);
+    }
+  });
+  movements = Array.from(unique.values());
+
+  movements.forEach(m => { 
+    m._era = classifyEra(m); 
+    // Fix Bug 2: Derive start_year for browser sorting
+    if (!m.start_year) {
+      const match = (m.era || '').match(/-?\d{3,4}/) || (m.summary || '').match(/\b(1[0-9]{3}|[2-9][0-9]{2})\b/);
+      if (match) m.start_year = parseInt(match[0]);
+    }
+    // Fix Bug 2: Parse relationships if they arrive as a string
+    if (typeof m.relationships === 'string') {
+      try { m.relationships = JSON.parse(m.relationships); }
+      catch (e) { m.relationships = []; }
+    }
+    if (!Array.isArray(m.relationships)) m.relationships = [];
+  });
   
   return movements;
 }
@@ -104,8 +128,8 @@ async function loadMovements() {
 function buildGraph() {
   const svg = d3.select('#graph-svg');
   const container = document.getElementById('graph-container');
-  const width = container.clientWidth;
-  const height = container.clientHeight;
+  const width = container.clientWidth || window.innerWidth;
+  const height = container.clientHeight || (window.innerHeight - 110); // fallback if hidden
 
   graphSvg = svg;
   graphWidth = width;
@@ -220,24 +244,32 @@ function buildGraph() {
       .attr('stop-opacity', 0);
   });
 
-  // D3 Force Simulation — Dual-focus layout (Classified vs Unclassified)
+  // D3 Force Simulation — Dual-focus layout (True Venn Separation)
   simulation = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(d => d.id).distance(220).strength(0.7))
-    .force('charge', d3.forceManyBody().strength(-550).distanceMax(1200))
-    .force('collision', d3.forceCollide().radius(d => d.radius + 40))
-    .force('x', d3.forceX(d => d.era.label === 'Unclassified' ? width * 0.9 : width * 0.45).strength(0.08))
-    .force('y', d3.forceY(height * 0.5).strength(0.08))
-    .alphaDecay(0.02)
-    .velocityDecay(0.28);
+    .force('link', d3.forceLink(links).id(d => d.id).distance(220).strength(0.4))
+    .force('charge', d3.forceManyBody().strength(-200).distanceMax(1500)) // Reduced repulsion
+    .force('collision', d3.forceCollide().radius(d => d.radius + 10).strength(0.7))
+    
+    // Extreme horizontal separation (40% strength vs 12%)
+    .force('x', d3.forceX(d => d.era.label === 'Unclassified' ? width * 1.1 : width * 0.2).strength(0.4))
+    .force('y', d3.forceY(height * 0.5).strength(0.1))
+    
+    // Contraction for unclassified (keep the holding pen tight)
+    .force('radial', d3.forceRadial(200, width * 1.1, height * 0.5).strength(d => d.era.label === 'Unclassified' ? 0.3 : 0))
+    
+    .alphaDecay(0.01) // Allow more time to settle
+    .velocityDecay(0.4); // Balance between stability and movement
 
   // Zoom
   const g = svg.append('g');
   graphG = g;
 
-  // Cluster hulls layer (behind edges)
-  const hullGroup = g.append('g').attr('class', 'hull-layer');
-
-  // Background bubbles for the two diagrams
+  const macroHullGroup = g.append('g').attr('class', 'macro-hulls');
+  const hullGroup = g.append('g').attr('class', 'era-hulls');
+  const linkGroup = g.append('g').attr('class', 'links');
+  const nodeGroup = g.append('g').attr('class', 'nodes');
+  const labelGroup = g.append('g').attr('class', 'labels');
+  const macroLabelGroup = g.append('g').attr('class', 'macro-labels');
   const bubbleGroup = g.append('g').attr('class', 'diagram-bubbles');
   
   bubbleGroup.append('circle')
@@ -277,8 +309,7 @@ function buildGraph() {
   graphZoom = zoom;
 
   // Render Edges
-  const link = g.append('g')
-    .selectAll('line')
+  const link = linkGroup.selectAll('line')
     .data(links)
     .join('line')
     .attr('class', d => `edge-line ${d.type}`)
@@ -295,8 +326,7 @@ function buildGraph() {
     .attr('opacity', 0.3);
 
   // Render Nodes
-  const node = g.append('g')
-    .selectAll('g')
+  const node = nodeGroup.selectAll('g')
     .data(nodes)
     .join('g')
     .attr('class', 'node-group')
@@ -416,16 +446,16 @@ function buildGraph() {
   // Tick
   let tickCount = 0;
   simulation.on('tick', () => {
-    tickCount++;
-    link
-      .attr('x1', d => d.source.x)
-      .attr('y1', d => d.source.y)
-      .attr('x2', d => d.target.x)
-      .attr('y2', d => d.target.y);
+    link.attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
 
     node.attr('transform', d => `translate(${d.x},${d.y})`);
-
-    // Animate flow dots along edges
+    
+    updateHulls(hullGroup, nodes);
+    updateMacroHulls(macroHullGroup, macroLabelGroup, nodes);
+    
     const t = (tickCount % 80) / 80;
     flowDots.each(function(d) {
       const dot = d3.select(this);
@@ -617,7 +647,11 @@ function updateGlobalFilters() {
   const isMatch = (d) => {
     const eraMatch = !activeEraFilter || d.era.label === activeEraFilter;
     const regionMatch = !activeRegionFilter || d.movement.region === activeRegionFilter;
-    const artistMatch = activeArtists.size === 0 || [...activeArtists].every(a => (d.movement.key_figures || '').includes(a));
+    
+    // Fix Bug 4: Precise artist matching
+    const figures = (d.movement.key_figures || '').split(';').map(s => s.trim().toLowerCase());
+    const artistMatch = activeArtists.size === 0 || [...activeArtists].every(a => figures.includes(a.toLowerCase()));
+
     const searchMatch = !searchQuery || fuzzyMatch(d.name.toLowerCase(), searchQuery);
     
     const eraStr = d.movement.era || '';
@@ -693,6 +727,17 @@ function zoomToMovement(slug) {
     .duration(600)
     .ease(d3.easeCubicOut)
     .call(graphZoom.transform, transform);
+}
+
+function panToNode(slug) {
+  let targetNode = null;
+  graphNode.each(d => { if (d.id === slug) targetNode = d; });
+  if (!targetNode) return;
+  const scale = 3;
+  const tx = graphWidth / 2 - targetNode.x * scale;
+  const ty = graphHeight / 2 - targetNode.y * scale;
+  const transform = d3.zoomIdentity.translate(tx, ty).scale(scale);
+  graphSvg.transition().duration(500).ease(d3.easeCubicOut).call(graphZoom.transform, transform);
 }
 
 function zoomToBoundingBox(nodes) {
@@ -776,6 +821,8 @@ function openEssayView(movement, event) {
   let l1 = 18, l2 = 6;
   if (theme === 'light') {
     l1 = 88; l2 = 96;
+  } else if (theme === 'sepia') {
+    l1 = 78; l2 = 68; // Fix Bug 3: Sepia values
   }
 
   bgLayer.style.background = `
@@ -885,7 +932,10 @@ function typewriterStart(text, container) {
       return;
     }
 
-    $('#essay-content').scrollTop = $('#essay-content').scrollHeight;
+    const el = $('#essay-content');
+    if (el.scrollHeight - el.scrollTop - el.clientHeight < 80) {
+      el.scrollTop = el.scrollHeight;
+    }
     typewriterRAF = requestAnimationFrame(tick);
   }
 
@@ -963,6 +1013,58 @@ function updateHulls(hullGroup, nodes) {
     .attr('fill', d => d.color)
     .attr('stroke', d => d.color);
   hulls.exit().remove();
+}
+
+function updateMacroHulls(macroHullGroup, labelGroup, nodes) {
+  const classifiedNodes = nodes.filter(n => n.era.label !== 'Unclassified');
+  const unclassifiedNodes = nodes.filter(n => n.era.label === 'Unclassified');
+
+  const classifiedPts = classifiedNodes.map(n => [n.x, n.y]);
+  const unclassifiedPts = unclassifiedNodes.map(n => [n.x, n.y]);
+
+  const macroData = [];
+  if (classifiedPts.length >= 3) {
+    const hull = d3.polygonHull(classifiedPts);
+    if (hull) macroData.push({ id: 'classified', label: 'History of Art', hull, color: '#e2b95a', nodes: classifiedNodes });
+  }
+  if (unclassifiedPts.length >= 3) {
+    const hull = d3.polygonHull(unclassifiedPts);
+    if (hull) macroData.push({ id: 'unclassified', label: 'Holding Pen', hull, color: '#555566', nodes: unclassifiedNodes });
+  }
+
+  const hulls = macroHullGroup.selectAll('.diagram-bubble').data(macroData, d => d.id);
+  hulls.enter().append('path')
+    .attr('class', 'diagram-bubble draggable-macro')
+    .attr('cursor', 'grab')
+    .merge(hulls)
+    .attr('d', d => `M${d.hull.join('L')}Z`)
+    .attr('stroke', d => d.color)
+    .attr('fill-opacity', 0.03) // Make slightly more visible for dragging
+    .call(d3.drag()
+      .on('start', (e, d) => {
+        simulation.alphaTarget(0.3).restart();
+        d.nodes.forEach(n => { n.fx = n.x; n.fy = n.y; });
+      })
+      .on('drag', (e, d) => {
+        d.nodes.forEach(n => { n.fx += e.dx; n.fy += e.dy; });
+      })
+      .on('end', (e, d) => {
+        simulation.alphaTarget(0);
+        d.nodes.forEach(n => { n.fx = null; n.fy = null; });
+      })
+    );
+  hulls.exit().remove();
+
+  // Update Macro Labels
+  const labels = labelGroup.selectAll('.diagram-title').data(macroData, d => d.id);
+  labels.enter().append('text')
+    .attr('class', 'diagram-title draggable-macro')
+    .attr('cursor', 'grab')
+    .merge(labels)
+    .attr('x', d => d3.polygonCentroid(d.hull)[0])
+    .attr('y', d => d3.polygonCentroid(d.hull)[1] - 60)
+    .text(d => d.label);
+  labels.exit().remove();
 }
 
 // ── Timeline Slider ──────────────────────────────────────────
@@ -1085,6 +1187,34 @@ async function init() {
   initParticles();
   initHashRouting();
   initBrowser(movements);
+
+  // Final snap: ensure centered after layout settles
+  setTimeout(() => {
+    const container = document.getElementById('graph-container');
+    if (!container || !simulation) return;
+    graphWidth = container.clientWidth || window.innerWidth;
+    graphHeight = container.clientHeight || (window.innerHeight - 110);
+    graphSvg.attr('viewBox', [0, 0, graphWidth, graphHeight]);
+    
+    simulation
+      .force('x', d3.forceX(d => d.era.label === 'Unclassified' ? graphWidth * 0.9 : graphWidth * 0.45).strength(0.08))
+      .force('y', d3.forceY(graphHeight * 0.5).strength(0.08))
+      .alpha(0.3).restart();
+  }, 300);
+
+  // Fix Bug 1: Resize handler
+  window.addEventListener('resize', () => {
+    const container = document.getElementById('graph-container');
+    if (!container || !simulation) return;
+    graphWidth = container.clientWidth;
+    graphHeight = container.clientHeight;
+    graphSvg.attr('viewBox', [0, 0, graphWidth, graphHeight]);
+    
+    simulation
+      .force('x', d3.forceX(d => d.era.label === 'Unclassified' ? graphWidth * 0.9 : graphWidth * 0.45).strength(0.08))
+      .force('y', d3.forceY(graphHeight * 0.5).strength(0.08))
+      .alpha(0.3).restart();
+  });
 
   // Tab switching logic
   const tabGraph = $('#tab-graph');
@@ -1212,8 +1342,8 @@ async function init() {
             keyboardFocusNode = bestNeighbor;
             updateKeyboardFocus();
             
-            // Auto pan if neighbor is off-screen
-            zoomToMovement(keyboardFocusNode.id);
+            // Auto pan if neighbor is off-screen (Fix Bug 5: use panToNode)
+            panToNode(keyboardFocusNode.id);
           }
         }
       }

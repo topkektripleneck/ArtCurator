@@ -7,6 +7,7 @@
 
 const ERA_ORDER = [
   'Ancient & Classical',
+  'Early Medieval',
   'Medieval',
   'Renaissance',
   'Baroque & Rococo',
@@ -23,6 +24,11 @@ let _sortCol   = 'name';
 let _sortDir   = 1;   // 1 = asc, -1 = desc
 let _page      = 0;
 const PAGE_SIZE = 40;
+let _controllerAC = null;
+
+function escHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
@@ -45,10 +51,15 @@ let searchQuery   = '';
 function applyFilters() {
   _page = 0;
   _filtered = _movements.filter(m => {
-    const matchEra    = activeEras.size === 0    || activeEras.has(m.era);
+    const eraLabel = m._era?.label || 'Unclassified';
+    const matchEra    = activeEras.size === 0    || activeEras.has(eraLabel);
     const matchRegion = activeRegions.size === 0 || activeRegions.has(m.region || 'Unknown');
     const q = searchQuery.toLowerCase();
-    const kf = Array.isArray(m.key_figures) ? m.key_figures.join(' ') : (m.key_figures || '');
+    
+    const kf = Array.isArray(m.key_figures) 
+      ? m.key_figures.join(' ') 
+      : (m.key_figures || '');
+    
     const matchSearch = !q
       || m.name.toLowerCase().includes(q)
       || (m.region || '').toLowerCase().includes(q)
@@ -63,8 +74,9 @@ function applyFilters() {
 
 function sortFiltered() {
   _filtered.sort((a, b) => {
-    let av = a[_sortCol] ?? '';
-    let bv = b[_sortCol] ?? '';
+    let av = _sortCol === 'era' ? (a._era?.label || '') : (a[_sortCol] ?? '');
+    let bv = _sortCol === 'era' ? (b._era?.label || '') : (b[_sortCol] ?? '');
+    
     if (_sortCol === 'start_year') {
       av = av || 9999;
       bv = bv || 9999;
@@ -82,17 +94,22 @@ function renderEraFilters() {
 
   const eraCounts = {};
   _movements.forEach(m => {
-    eraCounts[m.era] = (eraCounts[m.era] || 0) + 1;
+    const label = m._era?.label || 'Unclassified';
+    eraCounts[label] = (eraCounts[label] || 0) + 1;
   });
 
   const eras = ERA_ORDER.filter(e => eraCounts[e]);
-  container.innerHTML = eras.map(era => `
-    <button class="browser-era-pill" data-era="${era}" title="${eraCounts[era]} movements">
-      <span class="era-dot" style="background:${eraColor(era)}"></span>
-      ${era}
-      <span class="era-count">${eraCounts[era]}</span>
-    </button>
-  `).join('');
+  container.innerHTML = eras.map(era => {
+    const eraObj = _movements.find(m => m._era?.label === era)?._era;
+    const color = eraObj?.color || '#555566';
+    return `
+      <button class="browser-era-pill" data-era="${era}" title="${eraCounts[era]} movements">
+        <span class="era-dot" style="background:${color}"></span>
+        ${era}
+        <span class="era-count">${eraCounts[era]}</span>
+      </button>
+    `;
+  }).join('');
 
   container.querySelectorAll('.browser-era-pill').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -127,17 +144,21 @@ function renderRegionFilter() {
 }
 
 function bindControls() {
+  if (_controllerAC) _controllerAC.abort(); 
+  _controllerAC = new AbortController();
+  const sig = { signal: _controllerAC.signal };
+
   // Search
   const search = document.getElementById('browser-search');
   if (search) {
     search.addEventListener('input', e => {
       searchQuery = e.target.value;
       applyFilters();
-    });
+    }, sig);
   }
 
-  // Sort headers
-  document.querySelectorAll('[data-sort]').forEach(th => {
+  // Sort headers (Fix Bug 2: Scope to browser view)
+  document.querySelectorAll('#browser-view [data-sort]').forEach(th => {
     th.addEventListener('click', () => {
       const col = th.dataset.sort;
       if (_sortCol === col) {
@@ -146,34 +167,37 @@ function bindControls() {
         _sortCol = col;
         _sortDir = 1;
       }
-      document.querySelectorAll('[data-sort]').forEach(h => h.classList.remove('sort-asc','sort-desc'));
+      document.querySelectorAll('#browser-view [data-sort]').forEach(h => h.classList.remove('sort-asc','sort-desc'));
       th.classList.add(_sortDir === 1 ? 'sort-asc' : 'sort-desc');
       sortFiltered();
       renderTable();
-    });
+    }, sig);
   });
 
   // Pagination
   document.getElementById('browser-prev')?.addEventListener('click', () => {
     if (_page > 0) { _page--; renderTable(); }
-  });
+  }, sig);
   document.getElementById('browser-next')?.addEventListener('click', () => {
     if ((_page + 1) * PAGE_SIZE < _filtered.length) { _page++; renderTable(); }
-  });
+  }, sig);
 
   // Clear filters
   document.getElementById('browser-clear')?.addEventListener('click', () => {
     activeEras    = new Set();
     activeRegions = new Set();
     searchQuery   = '';
-    document.getElementById('browser-search').value = '';
-    document.getElementById('browser-region-select').value = '';
+    const searchEl = document.getElementById('browser-search');
+    if (searchEl) searchEl.value = '';
+    const regionEl = document.getElementById('browser-region-select');
+    if (regionEl) regionEl.value = '';
     document.querySelectorAll('.browser-era-pill').forEach(b => b.classList.remove('active'));
     applyFilters();
-  });
+  }, sig);
 }
 
 function renderTable() {
+  _openId = null; // Fix Bug 5: Reset essay state on page change
   const tbody = document.getElementById('browser-tbody');
   if (!tbody) return;
 
@@ -186,23 +210,30 @@ function renderTable() {
     return;
   }
 
-  tbody.innerHTML = page.map(m => `
-    <tr class="browser-row" data-id="${m.id}" tabindex="0">
-      <td class="col-name">
-        <span class="movement-name">${m.name}</span>
-        ${m.wikidata_id ? `<a class="wiki-link" href="https://www.wikidata.org/wiki/${m.wikidata_id}" target="_blank" title="Wikidata">↗</a>` : ''}
-      </td>
-      <td class="col-era">
-        <span class="era-badge" style="--era-color:${eraColor(m.era)}">${m.era}</span>
-      </td>
-      <td class="col-year">${m.start_year || '—'}</td>
-      <td class="col-region">${m.region || '—'}</td>
-      <td class="col-figures">${
-        (Array.isArray(m.key_figures) ? m.key_figures : (m.key_figures || '').split(';').map(s => s.trim()).filter(s => s))
-        .slice(0, 3).join(', ') || '—'
-      }</td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = page.map(m => {
+    const eraColor = m._era?.color || '#555566';
+    const eraLabel = m._era?.label || 'Unclassified';
+    
+    return `
+      <tr class="browser-row" data-id="${m.id}" tabindex="0">
+        <td class="col-name">
+          <span class="movement-name">${escHtml(m.name)}</span>
+          ${m.wikidata_id ? `<a class="wiki-link" href="https://www.wikidata.org/wiki/${m.wikidata_id}" target="_blank" title="Wikidata">↗</a>` : ''}
+        </td>
+        <td class="col-era">
+          <span class="era-badge" style="background:${hexToRgba(eraColor, 0.12)}; color:${eraColor}; border:1px solid ${hexToRgba(eraColor, 0.3)}">
+            ${escHtml(eraLabel)}
+          </span>
+        </td>
+        <td class="col-year">${m.start_year || '—'}</td>
+        <td class="col-region">${escHtml(m.region) || '—'}</td>
+        <td class="col-figures">${
+          (Array.isArray(m.key_figures) ? m.key_figures : (m.key_figures || '').split(';').map(s => s.trim()).filter(s => s))
+          .slice(0, 3).map(f => escHtml(f)).join(', ') || '—'
+        }</td>
+      </tr>
+    `;
+  }).join('');
 
   // Row click → expand essay
   tbody.querySelectorAll('.browser-row').forEach(row => {
@@ -228,6 +259,14 @@ function toggleEssay(row, page) {
   if (_openId === id) { _openId = null; return; }
 
   _openId = id;
+  
+  const figures = Array.isArray(movement.key_figures)
+    ? movement.key_figures
+    : (movement.key_figures || '').split(';').map(s => s.trim()).filter(Boolean);
+
+  const eraColor = movement._era?.color || '#555566';
+  const eraLabel = movement._era?.label || 'Unclassified';
+
   const essayRow = document.createElement('tr');
   essayRow.className = 'browser-essay-row';
   essayRow.innerHTML = `
@@ -235,33 +274,50 @@ function toggleEssay(row, page) {
       <div class="browser-essay">
         <div class="essay-header">
           <div>
-            <h3 class="essay-title">${movement.name}</h3>
+            <h3 class="essay-title">${escHtml(movement.name)}</h3>
             <div class="essay-meta">
-              <span class="era-badge" style="--era-color:${eraColor(movement.era)}">${movement.era}</span>
-              ${movement.region ? `<span class="essay-region">📍 ${movement.region}</span>` : ''}
+              <span class="era-badge" style="background:${hexToRgba(eraColor, 0.12)}; color:${eraColor}; border:1px solid ${hexToRgba(eraColor, 0.3)}">
+                ${escHtml(eraLabel)}
+              </span>
+              ${movement.region ? `<span class="essay-region">📍 ${escHtml(movement.region)}</span>` : ''}
               ${movement.start_year ? `<span class="essay-year">c. ${movement.start_year}</span>` : ''}
             </div>
           </div>
-          <button class="essay-close" onclick="this.closest('.browser-essay-row').remove()">✕</button>
+          <button class="essay-close">✕</button>
         </div>
-        ${movement.key_figures?.length ? `
+        ${figures.length ? `
           <div class="essay-figures">
             <span class="essay-label">Key figures</span>
-            ${movement.key_figures.map(f => `<span class="figure-tag">${f}</span>`).join('')}
+            ${figures.map(f => `<span class="figure-tag">${escHtml(f)}</span>`).join('')}
           </div>
         ` : ''}
-        <div class="essay-body">${movement.summary}</div>
-        ${movement.snippet ? `
+        <div class="essay-body">${escHtml(movement.summary).replace(/\n/g, '<br>')}</div>
+        ${movement.wikipedia_snippet ? `
           <details class="essay-snippet">
             <summary>Wikipedia excerpt</summary>
-            <p>${movement.snippet}</p>
+            <p>${escHtml(movement.wikipedia_snippet)}</p>
           </details>
         ` : ''}
       </div>
     </td>
   `;
   row.after(essayRow);
+
+  // Fix Bug 4: Robust close logic and _openId reset
+  essayRow.querySelector('.essay-close').addEventListener('click', () => {
+    essayRow.remove();
+    _openId = null;
+  });
+
   essayRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function hexToRgba(hex, alpha) {
+  if (!hex || hex[0] !== '#') return `rgba(85,85,102,${alpha})`;
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 function updateCount() {
@@ -277,21 +333,6 @@ function updatePager() {
   const next = document.getElementById('browser-next');
   if (prev) prev.disabled = _page === 0;
   if (next) next.disabled = (_page + 1) * PAGE_SIZE >= _filtered.length;
-}
-
-function eraColor(era) {
-  const colors = {
-    'Ancient & Classical': '#8B6914',
-    'Medieval':           '#6B4423',
-    'Renaissance':        '#C4A35A',
-    'Baroque & Rococo':   '#B8860B',
-    '19th Century':       '#D4763A',
-    'Early Modern':       '#CD5C5C',
-    'Post-War':           '#6A8EAE',
-    'Contemporary':       '#7B68AE',
-    'Unclassified':       '#555566',
-  };
-  return colors[era] || '#555566';
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
