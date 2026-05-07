@@ -32,6 +32,8 @@ let activeEraFilter = null;
 let activeRegionFilter = '';
 let activeArtists = new Set();
 let edges = [];
+let timelineMin = -5000;
+let timelineMax = 2030;
 
 const THEMES = ['dark', 'light', 'sepia'];
 let currentThemeIdx = 0;
@@ -137,6 +139,12 @@ function buildGraph() {
     .data(['blur', 'SourceGraphic'])
     .join('feMergeNode')
     .attr('in', d => d);
+
+  // Tooltip elements (Fix Bug 1: Declared before use)
+  const tooltip = $('#node-tooltip');
+  const tooltipName = $('#tooltip-name');
+  const tooltipArtist = $('#tooltip-artist');
+  const tooltipDesc = $('#tooltip-desc');
 
   // Build nodes
   const nodes = movements.map((m, i) => ({
@@ -364,25 +372,30 @@ function buildGraph() {
     tooltip.classList.add('hidden');
   });
 
-  // Tooltip elements
-  const tooltip = $('#node-tooltip');
-  const tooltipName = $('#tooltip-name');
-  const tooltipArtist = $('#tooltip-artist');
-  const tooltipDesc = $('#tooltip-desc');
 
-  // Click → Open Essay
+  // Click & Double Click Handling (Fix Bug 5: Delay separation)
+  let clickTimer = null;
+
   node.on('click', (event, d) => {
     event.stopPropagation();
-    keyboardFocusNode = d;
-    updateKeyboardFocus();
-    openEssayView(d.movement, event);
+    if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
+    
+    clickTimer = setTimeout(() => {
+      clickTimer = null;
+      keyboardFocusNode = d;
+      updateKeyboardFocus();
+      openEssayView(d.movement, event);
+    }, 250);
   });
 
-  // Double Click → Focus Mode
   node.on('dblclick', (event, d) => {
     event.stopPropagation();
-    const neighbors = adjacency.get(d.id) || new Set();
+    if (clickTimer) {
+      clearTimeout(clickTimer);
+      clickTimer = null;
+    }
     
+    const neighbors = adjacency.get(d.id) || new Set();
     isFocusMode = true;
     svg.classed('graph-focus-mode', true);
     
@@ -606,7 +619,15 @@ function updateGlobalFilters() {
     const regionMatch = !activeRegionFilter || d.movement.region === activeRegionFilter;
     const artistMatch = activeArtists.size === 0 || [...activeArtists].every(a => (d.movement.key_figures || '').includes(a));
     const searchMatch = !searchQuery || fuzzyMatch(d.name.toLowerCase(), searchQuery);
-    return eraMatch && regionMatch && artistMatch && searchMatch;
+    
+    const eraStr = d.movement.era || '';
+    const yearMatch = eraStr.match(/-?\d{3,4}/);
+    const timelineMatch = !yearMatch || (() => {
+      const y = parseInt(yearMatch[0]);
+      return y >= timelineMin && y <= timelineMax;
+    })();
+
+    return eraMatch && regionMatch && artistMatch && searchMatch && timelineMatch;
   };
 
   graphNode.classed('dimmed', d => !isMatch(d));
@@ -648,7 +669,7 @@ function zoomToMovement(slug) {
 
   // Clear era filter state
   activeEraFilter = null;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.era-item').forEach(c => c.classList.remove('active'));
 
   // Highlight only this node and its neighbors
   graphNode.classed('dimmed', d => d.id !== slug);
@@ -705,6 +726,8 @@ function zoomToBoundingBox(nodes) {
 
 function resetFilters() {
   activeEraFilter = null;
+  timelineMin = -5000;
+  timelineMax = 2030;
   document.querySelectorAll('.era-item').forEach(c => c.classList.remove('active'));
   $('#filter-dropdown').classList.add('hidden');
 
@@ -854,7 +877,12 @@ function typewriterStart(text, container) {
     lastTime = timestamp;
 
     if (ci >= chars.length) {
-      pi++; ci = 0; lastTime = timestamp + 400; // paragraph pause
+      pi++; ci = 0;
+      lastTime = 0; 
+      setTimeout(() => { 
+        if (activeMovement) typewriterRAF = requestAnimationFrame(tick); 
+      }, 400);
+      return;
     }
 
     $('#essay-content').scrollTop = $('#essay-content').scrollHeight;
@@ -966,13 +994,9 @@ function initTimeline() {
 
     // Filter nodes by year range
     if (!graphNode) return;
-    graphNode.classed('dimmed', d => {
-      const eraStr = d.movement.era || '';
-      const yearMatch = eraStr.match(/-?\d{3,4}/);
-      if (!yearMatch) return false;
-      const year = parseInt(yearMatch[0]);
-      return year < lo || year > hi;
-    });
+    timelineMin = lo;
+    timelineMax = hi;
+    updateGlobalFilters();
   }
 
   minSlider.addEventListener('input', updateTimeline);
