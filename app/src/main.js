@@ -68,15 +68,16 @@ function classifyEra(movement) {
   }
   // Fallback: try to infer from name
   const name = movement.name.toLowerCase();
-  if (name.includes('ancient') || name.includes('celtic') || name.includes('byzantine')) return ERA_GROUPS[0];
-  if (name.includes('medieval') || name.includes('gothic') || name.includes('romanesque')) return ERA_GROUPS[1];
-  if (name.includes('renaissance') || name.includes('manneris')) return ERA_GROUPS[2];
-  if (name.includes('baroque') || name.includes('rococo')) return ERA_GROUPS[3];
-  if (name.includes('impressioni') || name.includes('realis')) return ERA_GROUPS[4];
-  if (name.includes('cubis') || name.includes('dada') || name.includes('bauhaus') || name.includes('constructiv')) return ERA_GROUPS[5];
-  if (name.includes('pop') || name.includes('minimal') || name.includes('abstract express')) return ERA_GROUPS[6];
-  if (name.includes('digital') || name.includes('cyber') || name.includes('ai ') || name.includes('conceptual')) return ERA_GROUPS[7];
-  return ERA_GROUPS[8]; // Unclassified
+  if (name.includes('ancient') || name.includes('celtic')) return ERA_GROUPS[0];
+  if (name.includes('byzantine') || name.includes('early medieval')) return ERA_GROUPS[1];
+  if (name.includes('medieval') || name.includes('gothic') || name.includes('romanesque')) return ERA_GROUPS[2];
+  if (name.includes('renaissance') || name.includes('manneris')) return ERA_GROUPS[3];
+  if (name.includes('baroque') || name.includes('rococo')) return ERA_GROUPS[4];
+  if (name.includes('impressioni') || name.includes('realis')) return ERA_GROUPS[5];
+  if (name.includes('cubis') || name.includes('dada') || name.includes('bauhaus') || name.includes('constructiv')) return ERA_GROUPS[6];
+  if (name.includes('pop') || name.includes('minimal') || name.includes('abstract express')) return ERA_GROUPS[7];
+  if (name.includes('digital') || name.includes('cyber') || name.includes('ai ') || name.includes('conceptual')) return ERA_GROUPS[8];
+  return ERA_GROUPS[9]; // Unclassified
 }
 
 // ── Data Loading ─────────────────────────────────────────────
@@ -446,25 +447,39 @@ function buildGraph() {
   // Tick
   let tickCount = 0;
   simulation.on('tick', () => {
+    tickCount++;
     link.attr('x1', d => d.source.x)
         .attr('y1', d => d.source.y)
         .attr('x2', d => d.target.x)
         .attr('y2', d => d.target.y);
 
     node.attr('transform', d => `translate(${d.x},${d.y})`);
-    
-    updateHulls(hullGroup, nodes);
-    updateMacroHulls(macroHullGroup, macroLabelGroup, nodes);
-    
-    const t = (tickCount % 80) / 80;
-    flowDots.each(function(d) {
-      const dot = d3.select(this);
-      dot.attr('cx', d.source.x + (d.target.x - d.source.x) * t)
-         .attr('cy', d.source.y + (d.target.y - d.source.y) * t);
-    });
 
-    // Update cluster hulls every 20 ticks
-    if (tickCount % 20 === 0) updateHulls(hullGroup, nodes);
+    // Update hulls every 20 ticks (Throttled for performance)
+    if (tickCount % 20 === 0) {
+      updateHulls(hullGroup, nodes);
+      updateMacroHulls(macroHullGroup, macroLabelGroup, nodes);
+    }
+  });
+
+  // Perpetual Flow Animation (Fix Bug 2: Decoupled from simulation tick)
+  let flowTick = 0;
+  let flowDotsRAF = null;
+  (function animateFlowDots() {
+    flowTick = (flowTick + 1) % 80;
+    const t = flowTick / 80;
+    flowDots.each(function(d) {
+      if (!d.source || !d.source.x) return;
+      d3.select(this)
+        .attr('cx', d.source.x + (d.target.x - d.source.x) * t)
+        .attr('cy', d.source.y + (d.target.y - d.source.y) * t);
+    });
+    flowDotsRAF = requestAnimationFrame(animateFlowDots);
+  })();
+
+  // Lifecycle Cleanup
+  window.addEventListener('beforeunload', () => {
+    if (flowDotsRAF) cancelAnimationFrame(flowDotsRAF);
   });
 
   // Drag handlers
@@ -844,8 +859,8 @@ function openEssayView(movement, event) {
 
   $('#essay-title').textContent = movement.name;
   const eraEl = $('#essay-era');
-  eraEl.textContent = movement.era || '';
-  eraEl.style.display = movement.era ? 'inline' : 'none';
+  eraEl.textContent = movement._era?.label || movement.era || '';
+  eraEl.style.display = (movement._era?.label || movement.era) ? 'inline' : 'none';
   const regionEl = $('#essay-region');
   regionEl.textContent = movement.region || '';
   regionEl.style.display = movement.region ? 'inline' : 'none';
@@ -1036,10 +1051,6 @@ function updateMacroHulls(macroHullGroup, labelGroup, nodes) {
   hulls.enter().append('path')
     .attr('class', 'diagram-bubble draggable-macro')
     .attr('cursor', 'grab')
-    .merge(hulls)
-    .attr('d', d => `M${d.hull.join('L')}Z`)
-    .attr('stroke', d => d.color)
-    .attr('fill-opacity', 0.03) // Make slightly more visible for dragging
     .call(d3.drag()
       .on('start', (e, d) => {
         simulation.alphaTarget(0.3).restart();
@@ -1052,7 +1063,11 @@ function updateMacroHulls(macroHullGroup, labelGroup, nodes) {
         simulation.alphaTarget(0);
         d.nodes.forEach(n => { n.fx = null; n.fy = null; });
       })
-    );
+    )
+    .merge(hulls)
+    .attr('d', d => `M${d.hull.join('L')}Z`)
+    .attr('stroke', d => d.color)
+    .attr('fill-opacity', 0.03); // Make slightly more visible for dragging
   hulls.exit().remove();
 
   // Update Macro Labels
